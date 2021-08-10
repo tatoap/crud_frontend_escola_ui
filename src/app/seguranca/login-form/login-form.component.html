@@ -1,0 +1,30 @@
+<div class="container" style="max-width: 400px; margin: auto" wrapper>
+
+  <form autocomplete="off" #f="ngForm">
+
+    <div class="p-grid p-fluid">
+      <div class="p-col-12">
+        <h1>Login</h1>
+      </div>
+      <div class="p-col-12">
+        <input pInputText type="email" name="usuario"
+          [(ngModel)]="dadosUsuario.email" placeholder="E-mail" #usuario required>
+      </div>
+
+      <div class="p-col-12">
+        <input pInputText type="password" name="senha"
+          [(ngModel)]="dadosUsuario.password" placeholder="Senha" #senha required>
+      </div>
+
+      <div class="p-col-12 p-field-checkbox">
+        <p-checkbox [(ngModel)]="salvar" name="salvar"></p-checkbox>
+        <label>Lembrar login</label>
+      </div>
+
+      <div class="p-col-12">
+        <button pButton type="submit" label="Login" [disabled]="!f.valid"
+          (click)="login(usuario.value, senha.value)"></button>
+      </div>
+    </div>
+  </form>
+</div>

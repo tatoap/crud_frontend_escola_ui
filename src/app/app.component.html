@@ -1,0 +1,24 @@
+<app-navbar *ngIf="exibindoNavbar()"></app-navbar>
+<router-outlet></router-outlet>
+
+<p-toast position="top-right"></p-toast>
+
+<p-confirmDialog header="Confirmação" icon="pi pi-question-circle"
+  [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '30vw'}" #confirmacao>
+  <p-footer>
+    <button type="button" pButton icon="pi pi-check" label="Sim"
+      (click)="confirmacao.accept()">
+    </button>
+    <button type="button" pButton icon="pi pi-times" label="Não"
+      (click)="confirmacao.reject()">
+    </button>
+  </p-footer>
+</p-confirmDialog>
+
+<!--
+  <app-pessoa-cadastro></app-pessoa-cadastro>
+  <app-lancamento-cadastro></app-lancamento-cadastro>
+  <app-lancamentos-pesquisa></app-lancamentos-pesquisa>
+  <app-pessoas-pesquisa></app-pessoas-pesquisa>
+
+-->

@@ -1,0 +1,128 @@
+<div class="container">
+  <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
+
+    <div class="p-grid">
+      <div class="p-col-12">
+        <h1>{{ editando ? 'Editar' : 'Novo' }} Aluno</h1>
+      </div>
+
+      <div class="p-col-12 p-fluid ">
+        <label>Nome</label>
+        <input pInputText type="text" name="nome"
+          [(ngModel)]="aluno.nome" #nome="ngModel" required minlength="5">
+
+        <app-message [control]="nome" error="required"
+          text="Informe o nome">
+        </app-message>
+        <app-message [control]="nome" error="minlength"
+          text="Mínimo de {{ nome.errors?.minlength?.requiredLength }} caracteres">
+        </app-message>
+      </div>
+
+      <div class="p-col-6 p-md-3 p-fluid">
+        <label>Idade</label>
+        <input pInputText type="text" name="idade"
+          [(ngModel)]="aluno.idade" #idade="ngModel" required>
+
+        <app-message [control]="idade" error="required"
+          text="Informe a idade">
+        </app-message>
+      </div>
+
+      <div class="p-col-12 p-md-6 p-fluid">
+        <label>Telefone</label>
+        <input pInputText type="text" name="telefone"
+          [(ngModel)]="aluno.telefone" #telefone="ngModel"
+          mask="(00) 0 0000-0000||(00) 0000-0000"/>
+      </div>
+
+      <div class="p-col-12 p-md-9 p-fluid">
+        <label>Logradouro</label>
+        <input pInputText type="text" name="logradouro"
+          [(ngModel)]="aluno.endereco.logradouro" #logradouro="ngModel" required>
+
+        <app-message [control]="logradouro" error="required"
+          text="Informe o logradouro">
+        </app-message>
+      </div>
+
+      <div class="p-col-12 p-md-3 p-fluid">
+        <label>Número</label>
+        <input pInputText type="text" name="numero"
+          [(ngModel)]="aluno.endereco.numero" #numero="ngModel" required>
+
+        <app-message [control]="numero" error="required"
+          text="Informe o número">
+        </app-message>
+      </div>
+
+      <div class="p-col-12 p-md-4 p-fluid">
+        <label>Complemento</label>
+        <input pInputText type="text" name="complemento"
+          [(ngModel)]="aluno.endereco.complemento" #complemento="ngModel">
+      </div>
+
+      <div class="p-col-12 p-md-4 p-fluid">
+        <label>Bairro</label>
+        <input pInputText type="text" name="bairro"
+          [(ngModel)]="aluno.endereco.bairro" #bairro="ngModel" required>
+
+        <app-message [control]="bairro" error="required"
+          text="Informe o bairro">
+        </app-message>
+      </div>
+
+      <div class="p-col-12 p-md-4 p-fluid">
+        <label>CEP</label>
+        <p-inputMask mask="99.999-999" name="cep"
+          [(ngModel)]="aluno.endereco.cep"
+          #cep="ngModel">
+        </p-inputMask>
+
+        <app-message [control]="cep" error="required"
+          text="Informe o CEP">
+        </app-message>
+      </div>
+
+      <div class="p-col-12 p-md-6 p-fluid">
+        <label>Estado</label>
+
+        <p-dropdown placeholder="Selecione..."
+          [filter]="true" [options]="estados"
+          [(ngModel)]="estadoSelecionado" name="estadoSelecionado"
+          (onChange)="carregarCidades()"
+          #estado="ngModel" required>
+        </p-dropdown>
+
+        <app-message [control]="estado" error="required"
+          text="Informe o estado">
+        </app-message>
+      </div>
+
+      <div class="p-col-12 p-md-6 p-fluid">
+        <label>Cidade</label>
+
+        <p-dropdown placeholder="Selecione..."
+          [filter]="true" [options]="cidades"
+          [(ngModel)]="aluno.endereco.cidade.id" name="cidade"
+          #cidade="ngModel" required
+          [disabled]="!estadoSelecionado">
+        </p-dropdown>
+
+        <app-message [control]="cidade" error="required"
+          text="Informe a cidade">
+        </app-message>
+      </div>
+
+      <div class="p-col-12 cadastro-acoes">
+        <button pButton type="submit" label="Salvar" [disabled]="!f.valid"></button>
+        <button pButton type="button" label="Novo"
+          (click)="novo(f)" class="p-button-info"
+          routerLink="/alunos/novo">
+        </button>
+
+        <a routerLink="/alunos">Voltar para a pesquisa</a>
+      </div>
+    </div>
+  </form>
+</div>

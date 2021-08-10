@@ -1,0 +1,60 @@
+<div class="container">
+  <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
+
+    <div class="p-grid">
+      <div class="p-col-12">
+        <h1>{{ editando ? 'Editar' : 'Nova' }} Turma</h1>
+      </div>
+
+      <div class="p-col-12 p-fluid ">
+        <label>Nome</label>
+        <input pInputText type="text" name="nome"
+          [(ngModel)]="turma.nome" #nome="ngModel" required minlength="5">
+
+        <app-message [control]="nome" error="required"
+          text="Informe o nome">
+        </app-message>
+        <app-message [control]="nome" error="minlength"
+          text="Mínimo de {{ nome.errors?.minlength?.requiredLength }} caracteres">
+        </app-message>
+      </div>
+
+      <div class="p-col-12 p-md-9 p-fluid">
+        <label>Instrutor</label>
+        <input pInputText type="text" name="instrutor"
+          [(ngModel)]="turma.instrutor" #instrutor="ngModel" required>
+
+        <app-message [control]="instrutor" error="required"
+          text="Informe o instrutor">
+        </app-message>
+      </div>
+
+      <div class="p-col-12 p-md-3 p-fluid">
+        <label>Carga horária</label>
+        <input pInputText type="text" name="cargaHoraria"
+          [(ngModel)]="turma.cargaHoraria" #cargaHoraria="ngModel" required>
+
+        <app-message [control]="cargaHoraria" error="required"
+          text="Informe a carga horária">
+        </app-message>
+      </div>
+
+      <div class="p-col-12">
+        <p-panel header="Alunos">
+          <app-turma-cadastro-aluno [alunos]="turma.alunos"></app-turma-cadastro-aluno>
+        </p-panel>
+      </div>
+
+      <div class="p-col-12 cadastro-acoes">
+        <button pButton type="submit" label="Salvar" [disabled]="!f.valid"></button>
+
+        <button pButton type="button" label="Novo"
+          (click)="novo(f)" class="p-button-info"
+          routerLink="/turmas/novo">
+        </button>
+
+        <a routerLink="/turmas">Voltar para a pesquisa</a>
+      </div>
+    </div>
+  </form>
+</div>

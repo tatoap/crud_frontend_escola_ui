@@ -1,0 +1,22 @@
+<nav class="navbar">
+  <div class="container">
+    <div class="p-grid">
+      <div class="p-col-12">
+        <a href="javascript:;" class="navbar-toggle" (click)="exibindoMenu = !exibindoMenu">
+          <i class="pi pi-bars"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <ul class="navbar-menu" [hidden]="!exibindoMenu">
+    <li class="navbar-usuario">{{ auth.jwtPayload?.nome }}</li>
+    <li class="navbar-menuItem" routerLinkActive="ativo" (click)="exibindoMenu = !exibindoMenu"
+      *ngIf="auth.temPermissao('ROLE_CADASTRAR_TURMA')"><a routerLink="/turmas">Turmas</a></li>
+
+    <li class="navbar-menuItem" routerLinkActive="ativo" (click)="exibindoMenu = !exibindoMenu"
+      *ngIf="auth.temPermissao('ROLE_CADASTRAR_ALUNO')"><a routerLink="/alunos">Alunos</a></li>
+
+    <li class="navbar-menuItem"><a href="#" (click)="logout()">Logout</a></li>
+  </ul>
+</nav>
